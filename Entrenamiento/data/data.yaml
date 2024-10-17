@@ -1,0 +1,6 @@
+train: /usr/src/app/info/train/images
+val: /usr/src/app/info/valid/images
+test: /usr/src/app/info/test/images
+
+nc: 1
+names: ['0']

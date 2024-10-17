@@ -1,0 +1,26 @@
+version: '3.8'
+
+networks:
+  detection_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.55.0/24
+        
+services:
+  api:
+    image: detection_api:latest
+    build:
+      context: ./plate_detection
+      dockerfile: plate_detection.dockerfile
+    ports:
+      - 8888:8888
+    restart: always
+    volumes:
+      - ./plate_detection.pt:/ultralytics/plate_detection.pt
+    environment:
+      - TZ=America/Bogota
+      - TORCH_HOME=/usr/src/app/cache
+    networks:
+      detection_net:
+        ipv4_address: 192.168.55.90
